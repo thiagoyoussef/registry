@@ -30,7 +30,7 @@
       schemaLocation="lib/schemas/eis-1.0.xsd"/>
     <import namespace="https://epp.tld.ee/schema/contact-ee-1.1"
       schemaLocation="lib/schemas/contact-ee-1.1.xsd"/>
-    <import namespace="https://epp.tld.ee/schema/domain-ee-1.2"
+    <import namespace="https://epp.tld.ee/schema/domain-ee-1.3"
       schemaLocation="lib/schemas/domain-ee-1.3.xsd"/>
 
     <annotation>
