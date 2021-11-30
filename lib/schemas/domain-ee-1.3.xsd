@@ -381,6 +381,8 @@ than English.
     <extension base="normalizedString">
       <attribute name="s" type="domain:statusValueType"
        use="required"/>
+      <attribute name="n" type="domain:clIDChgSimpleType"
+       use="required"/>
       <attribute name="lang" type="language"
        default="en"/>
     </extension>
