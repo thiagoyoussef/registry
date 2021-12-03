@@ -1,13 +1,18 @@
 require 'test_helper'
 
 class EppDomainCheckBaseTest < EppTestCase
+
+  setup do
+    @domain_schema_version = '1.3'
+  end
+
   def test_returns_valid_response
     request_xml = <<-XML
       <?xml version="1.0" encoding="UTF-8" standalone="no"?>
       <epp xmlns="#{Xsd::Schema.filename(for_prefix: 'epp-ee', for_version: '1.0')}">
         <command>
           <check>
-            <domain:check xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}">
+            <domain:check xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}">
               <domain:name>some.test</domain:name>
             </domain:check>
           </check>
@@ -21,7 +26,7 @@ class EppDomainCheckBaseTest < EppTestCase
     response_xml = Nokogiri::XML(response.body)
     assert_epp_response :completed_successfully
     assert_correct_against_schema response_xml
-    assert_equal 'some.test', response_xml.at_xpath('//domain:name', 'domain' => "#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}").text
+    assert_equal 'some.test', response_xml.at_xpath('//domain:name', 'domain' => "#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}").text
   end
 
   def test_domain_is_available_when_not_registered_or_blocked
@@ -30,7 +35,7 @@ class EppDomainCheckBaseTest < EppTestCase
       <epp xmlns="#{Xsd::Schema.filename(for_prefix: 'epp-ee', for_version: '1.0')}">
         <command>
           <check>
-            <domain:check xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}">
+            <domain:check xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}">
               <domain:name>available.test</domain:name>
             </domain:check>
           </check>
@@ -43,8 +48,8 @@ class EppDomainCheckBaseTest < EppTestCase
 
     response_xml = Nokogiri::XML(response.body)
     assert_correct_against_schema response_xml
-    assert_equal '1', response_xml.at_xpath('//domain:name', 'domain' => "#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}")['avail']
-    assert_nil response_xml.at_xpath('//domain:reason', 'domain' => "#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}")
+    assert_equal '1', response_xml.at_xpath('//domain:name', 'domain' => "#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}")['avail']
+    assert_nil response_xml.at_xpath('//domain:reason', 'domain' => "#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}")
   end
 
   def test_domain_is_available_when_reserved
@@ -55,7 +60,7 @@ class EppDomainCheckBaseTest < EppTestCase
       <epp xmlns="#{Xsd::Schema.filename(for_prefix: 'epp-ee', for_version: '1.0')}">
         <command>
           <check>
-            <domain:check xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}">
+            <domain:check xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}">
               <domain:name>reserved.test</domain:name>
             </domain:check>
           </check>
@@ -68,8 +73,8 @@ class EppDomainCheckBaseTest < EppTestCase
 
     response_xml = Nokogiri::XML(response.body)
     assert_correct_against_schema response_xml
-    assert_equal '1', response_xml.at_xpath('//domain:name', 'domain' => "#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}")['avail']
-    assert_nil response_xml.at_xpath('//domain:reason', 'domain' => "#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}")
+    assert_equal '1', response_xml.at_xpath('//domain:name', 'domain' => "#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}")['avail']
+    assert_nil response_xml.at_xpath('//domain:reason', 'domain' => "#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}")
   end
 
   def test_domain_is_unavailable_when_format_is_invalid
@@ -78,7 +83,7 @@ class EppDomainCheckBaseTest < EppTestCase
       <epp xmlns="#{Xsd::Schema.filename(for_prefix: 'epp-ee', for_version: '1.0')}">
         <command>
           <check>
-            <domain:check xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}">
+            <domain:check xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}">
               <domain:name>invalid</domain:name>
             </domain:check>
           </check>
@@ -91,8 +96,8 @@ class EppDomainCheckBaseTest < EppTestCase
 
     response_xml = Nokogiri::XML(response.body)
     assert_correct_against_schema response_xml
-    assert_equal '0', response_xml.at_xpath('//domain:name', 'domain' => "#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}")['avail']
-    assert_equal 'invalid format', response_xml.at_xpath('//domain:reason', 'domain' => "#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}").text
+    assert_equal '0', response_xml.at_xpath('//domain:name', 'domain' => "#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}")['avail']
+    assert_equal 'invalid format', response_xml.at_xpath('//domain:reason', 'domain' => "#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}").text
   end
 
   def test_domain_is_unavailable_when_registered
@@ -103,7 +108,7 @@ class EppDomainCheckBaseTest < EppTestCase
       <epp xmlns="#{Xsd::Schema.filename(for_prefix: 'epp-ee', for_version: '1.0')}">
         <command>
           <check>
-            <domain:check xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}">
+            <domain:check xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}">
               <domain:name>shop.test</domain:name>
             </domain:check>
           </check>
@@ -116,8 +121,8 @@ class EppDomainCheckBaseTest < EppTestCase
 
     response_xml = Nokogiri::XML(response.body)
     assert_correct_against_schema response_xml
-    assert_equal '0', response_xml.at_xpath('//domain:name', 'domain' => "#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}")['avail']
-    assert_equal 'in use', response_xml.at_xpath('//domain:reason', 'domain' => "#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}").text
+    assert_equal '0', response_xml.at_xpath('//domain:name', 'domain' => "#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}")['avail']
+    assert_equal 'in use', response_xml.at_xpath('//domain:reason', 'domain' => "#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}").text
   end
 
   def test_domain_is_unavailable_when_blocked
@@ -128,7 +133,7 @@ class EppDomainCheckBaseTest < EppTestCase
       <epp xmlns="#{Xsd::Schema.filename(for_prefix: 'epp-ee', for_version: '1.0')}">
         <command>
           <check>
-            <domain:check xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}">
+            <domain:check xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}">
               <domain:name>blocked.test</domain:name>
             </domain:check>
           </check>
@@ -141,8 +146,8 @@ class EppDomainCheckBaseTest < EppTestCase
 
     response_xml = Nokogiri::XML(response.body)
     assert_correct_against_schema response_xml
-    assert_equal '0', response_xml.at_xpath('//domain:name', 'domain' => "#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}")['avail']
-    assert_equal 'Blocked', response_xml.at_xpath('//domain:reason', 'domain' => "#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}").text
+    assert_equal '0', response_xml.at_xpath('//domain:name', 'domain' => "#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}")['avail']
+    assert_equal 'Blocked', response_xml.at_xpath('//domain:reason', 'domain' => "#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}").text
   end
 
   def test_domain_is_unavailable_when_zone_with_the_same_origin_exists
@@ -153,7 +158,7 @@ class EppDomainCheckBaseTest < EppTestCase
       <epp xmlns="#{Xsd::Schema.filename(for_prefix: 'epp-ee', for_version: '1.0')}">
         <command>
           <check>
-            <domain:check xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}">
+            <domain:check xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}">
               <domain:name>test</domain:name>
             </domain:check>
           </check>
@@ -166,8 +171,8 @@ class EppDomainCheckBaseTest < EppTestCase
 
     response_xml = Nokogiri::XML(response.body)
     assert_correct_against_schema response_xml
-    assert_equal '0', response_xml.at_xpath('//domain:name', 'domain' => "#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}")['avail']
-    assert_equal 'Zone with the same origin exists', response_xml.at_xpath('//domain:reason', 'domain' => "#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}").text
+    assert_equal '0', response_xml.at_xpath('//domain:name', 'domain' => "#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}")['avail']
+    assert_equal 'Zone with the same origin exists', response_xml.at_xpath('//domain:reason', 'domain' => "#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}").text
   end
 
   def test_multiple_domains
@@ -176,7 +181,7 @@ class EppDomainCheckBaseTest < EppTestCase
       <epp xmlns="#{Xsd::Schema.filename(for_prefix: 'epp-ee', for_version: '1.0')}">
         <command>
           <check>
-            <domain:check xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}">
+            <domain:check xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}">
               <domain:name>one.test</domain:name>
               <domain:name>two.test</domain:name>
               <domain:name>three.test</domain:name>
@@ -191,6 +196,6 @@ class EppDomainCheckBaseTest < EppTestCase
 
     response_xml = Nokogiri::XML(response.body)
     assert_correct_against_schema response_xml
-    assert_equal 3, response_xml.xpath('//domain:cd', 'domain' => "#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}").size
+    assert_equal 3, response_xml.xpath('//domain:cd', 'domain' => "#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}").size
   end
 end

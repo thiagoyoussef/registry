@@ -12,6 +12,7 @@ class EppDomainUpdateRemDnsTest < EppTestCase
     @original_registrant_change_verification =
       Setting.request_confirmation_on_registrant_change_enabled
     ActionMailer::Base.deliveries.clear
+    @domain_schema_version = '1.3'
   end
 
   teardown do
@@ -25,7 +26,7 @@ class EppDomainUpdateRemDnsTest < EppTestCase
       <epp xmlns="#{Xsd::Schema.filename(for_prefix: 'epp-ee', for_version: '1.0')}">
         <command>
           <update>
-            <domain:update xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}">
+            <domain:update xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}">
               <domain:name>shop.test</domain:name>
                 <domain:chg>
                   <domain:authInfo>
@@ -65,7 +66,7 @@ class EppDomainUpdateRemDnsTest < EppTestCase
       <epp xmlns="#{Xsd::Schema.filename(for_prefix: 'epp-ee', for_version: '1.0')}">
         <command>
           <update>
-            <domain:update xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}">
+            <domain:update xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}">
               <domain:name>shop.test</domain:name>
                 <domain:chg>
                   <domain:authInfo>

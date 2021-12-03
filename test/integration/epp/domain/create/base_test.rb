@@ -136,7 +136,7 @@ class EppDomainCreateBaseTest < EppTestCase
       <epp xmlns="#{Xsd::Schema.filename(for_prefix: 'epp-ee', for_version: '1.0')}">
         <command>
           <create>
-            <domain:create xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}">
+            <domain:create xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}">
               <domain:name>#{name}</domain:name>
               <domain:registrant>#{registrant.code}</domain:registrant>
             </domain:create>

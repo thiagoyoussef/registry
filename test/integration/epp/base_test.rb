@@ -9,6 +9,7 @@ end
 class EppBaseTest < EppTestCase
   setup do
     @original_session_timeout = EppSession.timeout
+    @domain_schema_version = '1.3'
   end
 
   teardown do
@@ -91,7 +92,7 @@ class EppBaseTest < EppTestCase
       <epp xmlns="#{Xsd::Schema.filename(for_prefix: 'epp-ee', for_version: '1.0')}">
         <command>
           <info>
-            <domain:info xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}">
+            <domain:info xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}">
               <domain:name>#{domains(:shop).name}</domain:name>
             </domain:info>
           </info>
@@ -115,7 +116,7 @@ class EppBaseTest < EppTestCase
       <epp xmlns="#{Xsd::Schema.filename(for_prefix: 'epp-ee', for_version: '1.0')}">
         <command>
           <info>
-            <domain:info xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}">
+            <domain:info xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}">
               <domain:name>#{domains(:shop).name}</domain:name>
             </domain:info>
           </info>
@@ -141,7 +142,7 @@ class EppBaseTest < EppTestCase
       <epp xmlns="#{Xsd::Schema.filename(for_prefix: 'epp-ee', for_version: '1.0')}">
         <command>
           <info>
-            <domain:info xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}">
+            <domain:info xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}">
               <domain:name>#{domains(:shop).name}</domain:name>
             </domain:info>
           </info>
@@ -168,7 +169,7 @@ class EppBaseTest < EppTestCase
       <epp xmlns="#{Xsd::Schema.filename(for_prefix: 'epp-ee', for_version: '1.0')}">
         <command>
           <info>
-            <domain:info xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}">
+            <domain:info xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}">
               <domain:name>#{domains(:shop).name}</domain:name>
             </domain:info>
           </info>

@@ -14,7 +14,7 @@ class EppDomainUpdateReplaceDnsTest < EppTestCase
   def schema_update
     <<~XML
 <?xml version=\"1.0\" encoding=\"utf-8\"?>
-<epp schemaLocation=\"https://epp.tld.ee/schema/epp-ee-1.0.xsd epp-ee-1.0.xsd                          https://epp.tld.ee/schema/domain-ee-1.2.xsd domain-ee-1.2.xsd                          urn:ietf:params:xml:ns:secDNS-1.1 secDNS-1.1.xsd                          https://epp.tld.ee/schema/eis-1.0.xsd eis-1.0.xsd\">
+<epp schemaLocation=\"https://epp.tld.ee/schema/epp-ee-1.0.xsd epp-ee-1.0.xsd                          https://epp.tld.ee/schema/domain-ee-1.3.xsd domain-ee-1.3.xsd                          urn:ietf:params:xml:ns:secDNS-1.1 secDNS-1.1.xsd                          https://epp.tld.ee/schema/eis-1.0.xsd eis-1.0.xsd\">
     <command>
         <update>
             <update>

@@ -1,6 +1,10 @@
 require 'test_helper'
 
 class EppDomainRenewBaseTest < EppTestCase
+  def setup
+    @domain_schema_version = '1.3'
+  end
+
   self.use_transactional_tests = false
 
   def test_renews_domain
@@ -14,7 +18,7 @@ class EppDomainRenewBaseTest < EppTestCase
       <epp xmlns="#{Xsd::Schema.filename(for_prefix: 'epp-ee', for_version: '1.0')}">
         <command>
           <renew>
-            <domain:renew xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}">
+            <domain:renew xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}">
               <domain:name>#{domain.name}</domain:name>
               <domain:curExpDate>#{domain.expire_time.to_date}</domain:curExpDate>
               <domain:period unit="y">1</domain:period>
@@ -48,7 +52,7 @@ class EppDomainRenewBaseTest < EppTestCase
       <epp xmlns="#{Xsd::Schema.filename(for_prefix: 'epp-ee', for_version: '1.0')}">
         <command>
           <renew>
-            <domain:renew xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}">
+            <domain:renew xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}">
               <domain:name>#{domain.name}</domain:name>
               <domain:curExpDate>#{domain.expire_time.to_date}</domain:curExpDate>
               <domain:period unit="y">1</domain:period>
@@ -84,7 +88,7 @@ class EppDomainRenewBaseTest < EppTestCase
       <epp xmlns="#{Xsd::Schema.filename(for_prefix: 'epp-ee', for_version: '1.0')}">
         <command>
           <renew>
-            <domain:renew xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}">
+            <domain:renew xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}">
               <domain:name>#{domain.name}</domain:name>
               <domain:curExpDate>#{domain.expire_time.to_date}</domain:curExpDate>
               <domain:period unit="y">1</domain:period>
@@ -120,7 +124,7 @@ class EppDomainRenewBaseTest < EppTestCase
       <epp xmlns="#{Xsd::Schema.filename(for_prefix: 'epp-ee', for_version: '1.0')}">
         <command>
           <renew>
-            <domain:renew xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}">
+            <domain:renew xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}">
               <domain:name>#{domain.name}</domain:name>
               <domain:curExpDate>#{domain.expire_time.to_date}</domain:curExpDate>
               <domain:period unit="y">1</domain:period>
@@ -150,7 +154,7 @@ class EppDomainRenewBaseTest < EppTestCase
       <epp xmlns="#{Xsd::Schema.filename(for_prefix: 'epp-ee', for_version: '1.0')}">
         <command>
           <renew>
-            <domain:renew xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}">
+            <domain:renew xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}">
               <domain:name>#{domain.name}</domain:name>
               <domain:curExpDate>#{domain.valid_to.to_date}</domain:curExpDate>
               <domain:period unit="m">1</domain:period>
@@ -181,7 +185,7 @@ class EppDomainRenewBaseTest < EppTestCase
       <epp xmlns="#{Xsd::Schema.filename(for_prefix: 'epp-ee', for_version: '1.0')}">
         <command>
           <renew>
-            <domain:renew xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}">
+            <domain:renew xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}">
               <domain:name>#{domain.name}</domain:name>
               <domain:curExpDate>#{domain.valid_to.to_date}</domain:curExpDate>
               <domain:period unit="m">1</domain:period>
@@ -212,7 +216,7 @@ class EppDomainRenewBaseTest < EppTestCase
       <epp xmlns="#{Xsd::Schema.filename(for_prefix: 'epp-ee', for_version: '1.0')}">
         <command>
           <renew>
-            <domain:renew xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}">
+            <domain:renew xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}">
               <domain:name>#{domain.name}</domain:name>
               <domain:curExpDate>#{domain.expire_time.to_date}</domain:curExpDate>
               <domain:period unit="y">1</domain:period>
@@ -242,7 +246,7 @@ class EppDomainRenewBaseTest < EppTestCase
       <epp xmlns="#{Xsd::Schema.filename(for_prefix: 'epp-ee', for_version: '1.0')}">
         <command>
           <renew>
-            <domain:renew xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}">
+            <domain:renew xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}">
               <domain:name>#{domain.name}</domain:name>
               <domain:curExpDate>#{domain.expire_time.to_date}</domain:curExpDate>
               <domain:period unit="m">2</domain:period>
@@ -273,7 +277,7 @@ class EppDomainRenewBaseTest < EppTestCase
       <epp xmlns="#{Xsd::Schema.filename(for_prefix: 'epp-ee', for_version: '1.0')}">
         <command>
           <renew>
-            <domain:renew xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}">
+            <domain:renew xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}">
               <domain:name>#{domain.name}</domain:name>
               <domain:curExpDate>#{provided_expiration_date}</domain:curExpDate>
             </domain:renew>
@@ -307,7 +311,7 @@ class EppDomainRenewBaseTest < EppTestCase
       <epp xmlns="#{Xsd::Schema.filename(for_prefix: 'epp-ee', for_version: '1.0')}">
         <command>
           <renew>
-            <domain:renew xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}">
+            <domain:renew xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}">
               <domain:name>#{domain.name}</domain:name>
               <domain:curExpDate>#{domain.expire_time.to_date}</domain:curExpDate>
               <domain:period unit="y">1</domain:period>

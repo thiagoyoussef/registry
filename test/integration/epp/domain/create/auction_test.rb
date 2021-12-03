@@ -4,6 +4,7 @@ class EppDomainCreateAuctionTest < EppTestCase
   setup do
     @auction = auctions(:one)
     Domain.release_to_auction = true
+    @domain_schema_version = '1.3'
   end
 
   teardown do
@@ -16,7 +17,7 @@ class EppDomainCreateAuctionTest < EppTestCase
       <epp xmlns="#{Xsd::Schema.filename(for_prefix: 'epp-ee', for_version: '1.0')}">
         <command>
           <create>
-            <domain:create xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}">
+            <domain:create xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}">
               <domain:name>not-at-auction.test</domain:name>
               <domain:registrant>#{contacts(:john).code}</domain:registrant>
             </domain:create>
@@ -53,7 +54,7 @@ class EppDomainCreateAuctionTest < EppTestCase
       <epp xmlns="#{Xsd::Schema.filename(for_prefix: 'epp-ee', for_version: '1.0')}">
         <command>
           <create>
-            <domain:create xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}">
+            <domain:create xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}">
               <domain:name>auction.test</domain:name>
               <domain:registrant>#{contacts(:john).code}</domain:registrant>
             </domain:create>
@@ -88,7 +89,7 @@ class EppDomainCreateAuctionTest < EppTestCase
       <epp xmlns="#{Xsd::Schema.filename(for_prefix: 'epp-ee', for_version: '1.0')}">
         <command>
           <create>
-            <domain:create xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}">
+            <domain:create xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}">
               <domain:name>auction.test</domain:name>
               <domain:registrant>#{contacts(:john).code}</domain:registrant>
             </domain:create>
@@ -126,7 +127,7 @@ class EppDomainCreateAuctionTest < EppTestCase
       <epp xmlns="#{Xsd::Schema.filename(for_prefix: 'epp-ee', for_version: '1.0')}">
         <command>
           <create>
-            <domain:create xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}">
+            <domain:create xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}">
               <domain:name>auction.test</domain:name>
               <domain:registrant>#{contacts(:john).code}</domain:registrant>
             </domain:create>
@@ -158,7 +159,7 @@ class EppDomainCreateAuctionTest < EppTestCase
       <epp xmlns="#{Xsd::Schema.filename(for_prefix: 'epp-ee', for_version: '1.0')}">
         <command>
           <create>
-            <domain:create xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}">
+            <domain:create xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}">
               <domain:name>auction.test</domain:name>
               <domain:registrant>#{contacts(:john).code}</domain:registrant>
             </domain:create>
@@ -192,7 +193,7 @@ class EppDomainCreateAuctionTest < EppTestCase
       <epp xmlns="#{Xsd::Schema.filename(for_prefix: 'epp-ee', for_version: '1.0')}">
         <command>
           <create>
-            <domain:create xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}">
+            <domain:create xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}">
               <domain:name>auction.test</domain:name>
               <domain:registrant>#{contacts(:john).code}</domain:registrant>
             </domain:create>
@@ -226,7 +227,7 @@ class EppDomainCreateAuctionTest < EppTestCase
       <epp xmlns="#{Xsd::Schema.filename(for_prefix: 'epp-ee', for_version: '1.0')}">
         <command>
           <create>
-            <domain:create xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}">
+            <domain:create xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}">
               <domain:name>auction.test</domain:name>
             </domain:create>
           </create>

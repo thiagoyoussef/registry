@@ -3,6 +3,7 @@ require 'test_helper'
 class EppLoginTest < EppTestCase
   setup do
     @original_sessions_per_registrar_setting = EppSession.sessions_per_registrar
+    @domain_schema_version = '1.3'
   end
 
   teardown do
@@ -25,7 +26,7 @@ class EppLoginTest < EppTestCase
               <lang>en</lang>
             </options>
             <svcs>
-              <objURI>#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}</objURI>
+              <objURI>#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}</objURI>
               <objURI>#{Xsd::Schema.filename(for_prefix: 'contact-ee', for_version: '1.1')}</objURI>
               <objURI>urn:ietf:params:xml:ns:host-1.0</objURI>
               <objURI>urn:ietf:params:xml:ns:keyrelay-1.0</objURI>
@@ -60,7 +61,7 @@ class EppLoginTest < EppTestCase
               <lang>en</lang>
             </options>
             <svcs>
-              <objURI>#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}</objURI>
+              <objURI>#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}</objURI>
               <objURI>#{Xsd::Schema.filename(for_prefix: 'contact-ee', for_version: '1.1')}</objURI>
               <objURI>urn:ietf:params:xml:ns:host-1.0</objURI>
               <objURI>urn:ietf:params:xml:ns:keyrelay-1.0</objURI>
@@ -94,7 +95,7 @@ class EppLoginTest < EppTestCase
               <lang>en</lang>
             </options>
             <svcs>
-              <objURI>#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}</objURI>
+              <objURI>#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}</objURI>
               <objURI>#{Xsd::Schema.filename(for_prefix: 'contact-ee', for_version: '1.1')}</objURI>
               <objURI>urn:ietf:params:xml:ns:host-1.0</objURI>
               <objURI>urn:ietf:params:xml:ns:keyrelay-1.0</objURI>
@@ -129,7 +130,7 @@ class EppLoginTest < EppTestCase
               <lang>en</lang>
             </options>
             <svcs>
-              <objURI>#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}</objURI>
+              <objURI>#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}</objURI>
               <objURI>#{Xsd::Schema.filename(for_prefix: 'contact-ee', for_version: '1.1')}</objURI>
               <objURI>urn:ietf:params:xml:ns:host-1.0</objURI>
               <objURI>urn:ietf:params:xml:ns:keyrelay-1.0</objURI>
@@ -164,7 +165,7 @@ class EppLoginTest < EppTestCase
               <lang>en</lang>
             </options>
             <svcs>
-              <objURI>#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}</objURI>
+              <objURI>#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}</objURI>
               <objURI>#{Xsd::Schema.filename(for_prefix: 'contact-ee', for_version: '1.1')}</objURI>
               <objURI>urn:ietf:params:xml:ns:host-1.0</objURI>
               <objURI>urn:ietf:params:xml:ns:keyrelay-1.0</objURI>

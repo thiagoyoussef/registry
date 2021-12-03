@@ -4,7 +4,7 @@ require 'test_helper'
 class EppDomainCreateAuctionIdnTest < EppTestCase
   def setup
     super
-
+    @domain_schema_version = '1.3'
     @idn_auction = auctions(:idn)
     Domain.release_to_auction = true
   end
@@ -24,7 +24,7 @@ class EppDomainCreateAuctionIdnTest < EppTestCase
       <epp xmlns="#{Xsd::Schema.filename(for_prefix: 'epp-ee', for_version: '1.0')}">
         <command>
           <create>
-            <domain:create xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}">
+            <domain:create xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}">
               <domain:name>xn--pramiid-n2a.test</domain:name>
               <domain:registrant>#{contacts(:john).code}</domain:registrant>
             </domain:create>
@@ -62,7 +62,7 @@ class EppDomainCreateAuctionIdnTest < EppTestCase
       <epp xmlns="#{Xsd::Schema.filename(for_prefix: 'epp-ee', for_version: '1.0')}">
         <command>
           <create>
-            <domain:create xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}">
+            <domain:create xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}">
               <domain:name>püramiid.test</domain:name>
               <domain:registrant>#{contacts(:john).code}</domain:registrant>
             </domain:create>
@@ -99,7 +99,7 @@ class EppDomainCreateAuctionIdnTest < EppTestCase
       <epp xmlns="#{Xsd::Schema.filename(for_prefix: 'epp-ee', for_version: '1.0')}">
         <command>
           <create>
-            <domain:create xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}">
+            <domain:create xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}">
               <domain:name>xn--pramiid-n2a.test</domain:name>
               <domain:registrant>#{contacts(:john).code}</domain:registrant>
             </domain:create>
@@ -136,7 +136,7 @@ class EppDomainCreateAuctionIdnTest < EppTestCase
       <epp xmlns="#{Xsd::Schema.filename(for_prefix: 'epp-ee', for_version: '1.0')}">
         <command>
           <create>
-            <domain:create xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}">
+            <domain:create xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}">
               <domain:name>püramiid.test</domain:name>
               <domain:registrant>#{contacts(:john).code}</domain:registrant>
             </domain:create>
@@ -174,7 +174,7 @@ class EppDomainCreateAuctionIdnTest < EppTestCase
       <epp xmlns="#{Xsd::Schema.filename(for_prefix: 'epp-ee', for_version: '1.0')}">
         <command>
           <create>
-            <domain:create xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}">
+            <domain:create xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}">
               <domain:name>püramiid.test</domain:name>
               <domain:registrant>#{contacts(:john).code}</domain:registrant>
             </domain:create>
@@ -214,7 +214,7 @@ class EppDomainCreateAuctionIdnTest < EppTestCase
       <epp xmlns="#{Xsd::Schema.filename(for_prefix: 'epp-ee', for_version: '1.0')}">
         <command>
           <create>
-            <domain:create xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}">
+            <domain:create xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}">
               <domain:name>xn--pramiid-n2a.test</domain:name>
               <domain:registrant>#{contacts(:john).code}</domain:registrant>
             </domain:create>

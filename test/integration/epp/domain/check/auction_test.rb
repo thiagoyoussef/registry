@@ -6,6 +6,7 @@ class EppDomainCheckAuctionTest < EppTestCase
     @auction = auctions(:one)
     @idn_auction = auctions(:idn)
     Domain.release_to_auction = true
+    @domain_schema_version = '1.3'
   end
 
   teardown do
@@ -20,7 +21,7 @@ class EppDomainCheckAuctionTest < EppTestCase
       <epp xmlns="#{Xsd::Schema.filename(for_prefix: 'epp-ee', for_version: '1.0')}">
         <command>
           <check>
-            <domain:check xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}">
+            <domain:check xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}">
               <domain:name>auction.test</domain:name>
             </domain:check>
           </check>
@@ -34,8 +35,8 @@ class EppDomainCheckAuctionTest < EppTestCase
     response_xml = Nokogiri::XML(response.body)
     assert_correct_against_schema response_xml
     assert_epp_response :completed_successfully
-    assert_equal '0', response_xml.at_xpath('//domain:name', 'domain' => "#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}")['avail']
-    assert_equal 'Domain is at auction', response_xml.at_xpath('//domain:reason', 'domain' => "#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}").text
+    assert_equal '0', response_xml.at_xpath('//domain:name', 'domain' => "#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}")['avail']
+    assert_equal 'Domain is at auction', response_xml.at_xpath('//domain:reason', 'domain' => "#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}").text
   end
 
   def test_idn_ascii_domain_is_unavailable_when_at_auction
@@ -46,7 +47,7 @@ class EppDomainCheckAuctionTest < EppTestCase
       <epp xmlns="#{Xsd::Schema.filename(for_prefix: 'epp-ee', for_version: '1.0')}">
         <command>
           <check>
-            <domain:check xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}">
+            <domain:check xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}">
               <domain:name>xn--pramiid-n2a.test</domain:name>
             </domain:check>
           </check>
@@ -60,8 +61,8 @@ class EppDomainCheckAuctionTest < EppTestCase
     response_xml = Nokogiri::XML(response.body)
     assert_correct_against_schema response_xml
     assert_epp_response :completed_successfully
-    assert_equal '0', response_xml.at_xpath('//domain:name', 'domain' => "#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}")['avail']
-    assert_equal 'Domain is at auction', response_xml.at_xpath('//domain:reason', 'domain' => "#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}").text
+    assert_equal '0', response_xml.at_xpath('//domain:name', 'domain' => "#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}")['avail']
+    assert_equal 'Domain is at auction', response_xml.at_xpath('//domain:reason', 'domain' => "#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}").text
   end
 
   def test_idn_unicode_domain_is_unavailable_when_at_auction
@@ -72,7 +73,7 @@ class EppDomainCheckAuctionTest < EppTestCase
       <epp xmlns="#{Xsd::Schema.filename(for_prefix: 'epp-ee', for_version: '1.0')}">
         <command>
           <check>
-            <domain:check xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}">
+            <domain:check xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}">
               <domain:name>püramiid.test</domain:name>
             </domain:check>
           </check>
@@ -86,8 +87,8 @@ class EppDomainCheckAuctionTest < EppTestCase
     response_xml = Nokogiri::XML(response.body)
     assert_correct_against_schema response_xml
     assert_epp_response :completed_successfully
-    assert_equal '0', response_xml.at_xpath('//domain:name', 'domain' => "#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}")['avail']
-    assert_equal 'Domain is at auction', response_xml.at_xpath('//domain:reason', 'domain' => "#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}").text
+    assert_equal '0', response_xml.at_xpath('//domain:name', 'domain' => "#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}")['avail']
+    assert_equal 'Domain is at auction', response_xml.at_xpath('//domain:reason', 'domain' => "#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}").text
   end
 
   def test_domain_is_unavailable_when_awaiting_payment
@@ -98,7 +99,7 @@ class EppDomainCheckAuctionTest < EppTestCase
       <epp xmlns="#{Xsd::Schema.filename(for_prefix: 'epp-ee', for_version: '1.0')}">
         <command>
           <check>
-            <domain:check xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}">
+            <domain:check xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}">
               <domain:name>auction.test</domain:name>
             </domain:check>
           </check>
@@ -112,8 +113,8 @@ class EppDomainCheckAuctionTest < EppTestCase
     response_xml = Nokogiri::XML(response.body)
     assert_correct_against_schema response_xml
     assert_epp_response :completed_successfully
-    assert_equal '0', response_xml.at_xpath('//domain:name', 'domain' => "#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}")['avail']
-    assert_equal 'Awaiting payment', response_xml.at_xpath('//domain:reason', 'domain' => "#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}").text
+    assert_equal '0', response_xml.at_xpath('//domain:name', 'domain' => "#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}")['avail']
+    assert_equal 'Awaiting payment', response_xml.at_xpath('//domain:reason', 'domain' => "#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}").text
   end
 
   def test_domain_is_available_when_payment_received
@@ -124,7 +125,7 @@ class EppDomainCheckAuctionTest < EppTestCase
       <epp xmlns="#{Xsd::Schema.filename(for_prefix: 'epp-ee', for_version: '1.0')}">
         <command>
           <check>
-            <domain:check xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}">
+            <domain:check xmlns:domain="#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}">
               <domain:name>auction.test</domain:name>
             </domain:check>
           </check>
@@ -138,7 +139,7 @@ class EppDomainCheckAuctionTest < EppTestCase
     response_xml = Nokogiri::XML(response.body)
     assert_correct_against_schema response_xml
     assert_epp_response :completed_successfully
-    assert_equal '1', response_xml.at_xpath('//domain:name', 'domain' => "#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}")['avail']
-    assert_nil response_xml.at_xpath('//domain:reason', 'domain' => "#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: '1.2')}")
+    assert_equal '1', response_xml.at_xpath('//domain:name', 'domain' => "#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}")['avail']
+    assert_nil response_xml.at_xpath('//domain:reason', 'domain' => "#{Xsd::Schema.filename(for_prefix: 'domain-ee', for_version: @domain_schema_version)}")
   end
 end
