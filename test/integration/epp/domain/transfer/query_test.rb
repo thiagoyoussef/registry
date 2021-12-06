@@ -1,6 +1,10 @@
 require 'test_helper'
 
 class EppDomainTransferQueryTest < EppTestCase
+  setup do
+    @domain_schema_version = '1.3'
+  end
+
   def test_returns_domain_transfer_details
     post epp_transfer_path, params: { frame: request_xml },
          headers: { 'HTTP_COOKIE' => 'session=api_bestnames' }
