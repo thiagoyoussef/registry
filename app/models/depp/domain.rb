@@ -35,7 +35,7 @@ module Depp
       self.epp_xml = EppXml::Domain.new(
         cl_trid_prefix: current_user.tag,
         schema_prefix: 'domain-ee',
-        schema_version: '1.1'
+        schema_version: '1.3'
       )
     end
 
@@ -196,6 +196,7 @@ module Depp
 
           ret[:statuses_attributes][i] = {
             code: x['s'],
+            status_notes: x['n'],
             description: x.text
           }
         end
