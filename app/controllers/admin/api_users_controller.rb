@@ -50,7 +50,7 @@ module Admin
     def set_test_date_to_api_user
       user_api = User.find(params[:user_api_id])
 
-      uri = URI.parse((ENV['registry_demo_registrar_api_user_url'] || 'http://testapi.test') + "?username=#{user_api.username}&identity_code=#{user_api.identity_code}")
+      uri = URI.parse((ENV['registry_demo_registrar_api_user_url']) + "?username=#{user_api.username}&identity_code=#{user_api.identity_code}")
 
       response = base_get_request(uri: uri, port: ENV['registry_demo_registrar_port'])
 
@@ -58,9 +58,8 @@ module Admin
         result = JSON.parse(response.body)
         demo_user_api = result['user_api']
 
-        Actions::RecordDateOfTest.record_result_to_api_user(
-                                  api_user:user_api,
-                                  date: demo_user_api['accreditation_date']) unless demo_user_api.empty?
+        Actions::RecordDateOfTest.record_result_to_api_user(api_user:user_api,
+                                                            date: demo_user_api['accreditation_date']) unless demo_user_api.empty?
         return redirect_to request.referrer, notice: 'User Api found'
       else
         return redirect_to request.referrer, notice: 'User Api no found or not accriditated yet'
