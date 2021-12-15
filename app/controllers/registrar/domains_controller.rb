@@ -88,6 +88,7 @@ class Registrar
       @domain_params[:period] = Depp::Domain.default_period
     end
 
+    # rubocop:disable Metrics/CognitiveComplexity
     def create
       authorize! :create, Depp::Domain
       @domain_params = domain_params.to_h
@@ -124,6 +125,7 @@ class Registrar
         render 'new'
       end
     end
+    # rubocop:enable Metrics/CognitiveComplexity
 
     def delete
       authorize! :delete, Depp::Domain
