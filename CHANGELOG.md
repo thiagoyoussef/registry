@@ -1,3 +1,12 @@
+20.12.2021
+* delete prohibited can be set to domains in force delete [#2218](https://github.com/internetee/registry/issues/2218)
+
+17.12.2021
+* invalid emails with mx and smtp failures are now rechecked on every run until linked to any domain [#2231](https://github.com/internetee/registry/pull/2231)
+
+14.12.2021
+* Added Truemail validation to contact create and contact update [#2184](https://github.com/internetee/registry/issues/2184)
+
 29.11.2021
 * Performance optimation for email validation task [#2226](https://github.com/internetee/registry/pull/2226)
 * Removed obj and extension update prohibited toggle feature [#2229](https://github.com/internetee/registry/pull/2229)
