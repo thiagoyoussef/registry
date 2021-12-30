@@ -9,16 +9,16 @@ Truemail.configure do |config|
   # config.verifier_domain = 'internet.ee'
 
   # Optional parameter. You can override default regex pattern
-  # config.email_pattern = /regex_pattern/
+  config.email_pattern = /(?=\A.{6,255}\z)(\A([\p{L}0-9]+[\W\w]*)@(xn--)?((?i-mx:[\p{L}0-9]+([\-.]{1}[\p{L}0-9]+)*\.\p{L}{2,63}))\z)/
 
   # Optional parameter. You can override default regex pattern
   # config.smtp_error_body_pattern = /regex_pattern/
 
   # Optional parameter. Connection timeout is equal to 2 ms by default.
-  config.connection_timeout = ENV['default_connection_timeout'].present? ? ENV['default_connection_timeout'].to_i : 1
+  config.connection_timeout = ENV['default_connection_timeout'].to_i | 1
 
   # Optional parameter. A SMTP server response timeout is equal to 2 ms by default.
-  config.response_timeout = ENV['default_response_timeout'].present? ? ENV['default_response_timeout'].to_i : 1
+  config.response_timeout = ENV['default_response_timeout'].to_i | 1
 
   # Optional parameter. Total of connection attempts. It is equal to 2 by default.
   # This parameter uses in mx lookup timeout error and smtp request (for cases when

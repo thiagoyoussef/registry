@@ -50,10 +50,52 @@ module Actions
     end
 
     def save_result(result)
-      validation_eventable.validation_events.create(validation_event_attrs(result))
+      if !result.success && @check_level == "mx"
+        result_validation = Actions::AAndAaaaEmailValidation.call(email: @email, value: 'A')
+        output_a_and_aaaa_validation_results(email: @email,
+                                             result: result_validation,
+                                             type: 'A')
+
+        result_validation = Actions::AAndAaaaEmailValidation.call(email: @email, value: 'AAAA') if result_validation.empty?
+        output_a_and_aaaa_validation_results(email: @email,
+                                             result: result_validation,
+                                             type: 'AAAA')
+
+        result_validation.present? ? result.success = true : result.success = false
+        validation_eventable.validation_events.create(validation_event_attrs(result))
+      else
+        validation_eventable.validation_events.create(validation_event_attrs(result))
+      end
     rescue ActiveRecord::RecordNotSaved
       logger.info "Cannot save validation result for #{log_object_id}"
       true
+    end
+
+    def output_a_and_aaaa_validation_results(email:, result:, type:)
+      return if Rails.env.test?
+
+      logger.info "Validated #{type} record for #{email}. Validation result - #{result}"
+    end
+
+    def check_for_records_value(domain:, value:)
+      result = nil
+      dns_servers = ENV['dnssec_resolver_ips'].to_s.split(',').map(&:strip)
+
+      Resolv::DNS.open({ nameserver: dns_servers }) do |dns|
+        dns.timeouts = ENV['a_and_aaaa_validation_timeout'].to_i || 1
+        ress = nil
+
+        case value
+        when 'A'
+          ress = dns.getresources domain, Resolv::DNS::Resource::IN::A
+        when 'AAAA'
+          ress = dns.getresources domain, Resolv::DNS::Resource::IN::AAAA
+        end
+
+        result = ress.map { |r| r.address }
+      end
+
+      result
     end
 
     def validation_event_attrs(result)
